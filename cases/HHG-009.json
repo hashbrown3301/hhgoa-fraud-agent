@@ -32,9 +32,9 @@
       }
     ],
     "similar_prior_cases": [],
-    "summary": "Case HHG-009 involves a customer-reported incident where the customer denied any fraudulent activity, but no supporting anomaly was identified. The verdict is uncertain with a fraud probability of 0.6, and the strongest evidence against fraud is that the $30.02 transaction falls within the card's 95th percentile ($235.42) and the card is used online 87% of the time.",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-009"
+    "summary": "Case HHG-009 involves a customer-reported transaction that the customer denies, but no clear anomalous pattern was identified. The verdict is uncertain with a fraud probability of 60%, and the strongest evidence against fraud is that the $30.02 transaction falls within the card's 95th percentile ($235.42) and the card is used online 87% of the time.",
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [
     {
@@ -58,17 +58,17 @@
     ],
     "final": [
       {
-        "action": "BLOCK_CARD",
-        "route": "L1",
-        "reason": "R2: customer denied the activity; exposure $30.02"
-      },
-      {
         "action": "CREATE_CASE",
         "route": "auto",
-        "reason": "R2/R6/R9: fraud case with evidence attached"
+        "reason": "R2: customer denies the activity, but no corroborating evidence strengthens the case"
+      },
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "R8: verdict remains uncertain (p=0.60) after verification; needs human judgement"
       }
     ],
-    "what_changed": "Simulated reply (denies) moved probability from 0.60 to 0.60; actions changed from ['VERIFY_WITH_CUSTOMER', 'CREATE_CASE'] to ['BLOCK_CARD', 'CREATE_CASE']."
+    "what_changed": "Simulated reply (denies) moved probability from 0.60 to 0.60; actions changed from ['VERIFY_WITH_CUSTOMER', 'CREATE_CASE'] to ['CREATE_CASE', 'ESCALATE_TO_ANALYST']."
   },
   "sar": {
     "file": false,
@@ -80,8 +80,8 @@
   },
   "stop_reason": "verification response settled the question",
   "tool_calls": 4,
-  "tokens": 619,
-  "latency_s": 0.92,
+  "tokens": 620,
+  "latency_s": 2.99,
   "what_if": {
     "confirms": {
       "reply": "confirms",
@@ -109,14 +109,14 @@
       "pattern": "none",
       "actions": [
         {
-          "action": "BLOCK_CARD",
-          "route": "L1",
-          "reason": "R2: customer denied the activity; exposure $30.02"
-        },
-        {
           "action": "CREATE_CASE",
           "route": "auto",
-          "reason": "R2/R6/R9: fraud case with evidence attached"
+          "reason": "R2: customer denies the activity, but no corroborating evidence strengthens the case"
+        },
+        {
+          "action": "ESCALATE_TO_ANALYST",
+          "route": "auto",
+          "reason": "R8: verdict remains uncertain (p=0.60) after verification; needs human judgement"
         }
       ],
       "explanation": "customer denial with no supporting anomaly"

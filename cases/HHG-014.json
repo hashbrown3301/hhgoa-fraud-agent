@@ -84,8 +84,8 @@
       "CC-2971"
     ],
     "summary": "Undocumented assessed at p=0.88 (a strong signal plus at least one more independent signal).",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-014"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [],
   "next_best_actions": {
@@ -161,5 +161,5 @@
   "stop_reason": "probability 0.88 with 3 independent pieces of evidence",
   "tool_calls": 3,
   "tokens": 0,
-  "latency_s": 12.8
+  "latency_s": 0.21
 }

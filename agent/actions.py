@@ -91,7 +91,13 @@ def final_actions(a0, a1, f, trigger, reply):
         if _r7(a0, trigger):
             acts.append(action("WARN_CUSTOMER", "R7: recurring-charge reminder", exp))
         return acts
-    return _fraud_actions(a1, f, trigger, denied=True)
+    if a1["verdict"] == "fraud":
+        return _fraud_actions(a1, f, trigger, denied=True)
+    # Customer denies, but the denial alone doesn't clear the fraud threshold (no corroborating
+    # evidence, p still < 0.70): don't loop back to another verification request, and don't block
+    # on an unresolved single signal (R1) - hand it to a human instead (R8).
+    return [action("CREATE_CASE", "R2: customer denies the activity, but no corroborating evidence strengthens the case", exp),
+            action("ESCALATE_TO_ANALYST", f"R8: verdict remains uncertain (p={a1['probability']:.2f}) after verification; needs human judgement", exp)]
 
 
 def connected(f, card_lookup=None):

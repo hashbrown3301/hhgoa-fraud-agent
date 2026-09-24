@@ -33,8 +33,8 @@
     ],
     "similar_prior_cases": [],
     "summary": "No fraud pattern assessed at p=0.25 (no deviation found, but this card shows heavy device-profile diversity (>= 25 distinct profiles): it likely bundles many real cardholders, so a routine match alone is not reliable evidence here (R1: verify)).",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-007"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [],
   "next_best_actions": {
@@ -75,5 +75,5 @@
   "stop_reason": "no deviation found, but this card shows heavy device-profile diversity (>= 25 distinct profiles): it likely bundles many real cardholders, so a routine match alone is not reliable evidence here (R1: verify)",
   "tool_calls": 3,
   "tokens": 0,
-  "latency_s": 1.21
+  "latency_s": 0.22
 }

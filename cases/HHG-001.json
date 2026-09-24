@@ -33,8 +33,8 @@
     ],
     "similar_prior_cases": [],
     "summary": "The transaction was deemed legitimate with no fraud pattern identified. The strongest supporting evidence includes the billing region 444.0 being visited 10 times over the past eight weeks and the $77.07 amount falling within the card's 95th percentile ($381.86). Additionally, the card is used in-person 99% of the time, reinforcing the low fraud probability of 0.08.",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-001"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [],
   "next_best_actions": {
@@ -75,5 +75,5 @@
   "stop_reason": "probability 0.08 with 3 independent pieces of evidence",
   "tool_calls": 3,
   "tokens": 638,
-  "latency_s": 3.26
+  "latency_s": 0.17
 }

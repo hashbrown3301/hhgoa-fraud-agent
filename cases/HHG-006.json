@@ -65,8 +65,8 @@
     ],
     "similar_prior_cases": [],
     "summary": "The case is adjudicated as fraud, triggered by a card-not-present transaction pattern on a new device. The strongest evidence includes a cluster of four anomalous transactions within a 30‑minute window on 2016‑11‑21 totaling $1,906.07, which deviate from the card's baseline (new product, rare channel), and the customer's denial combined with an independent anomaly per rule R2.",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-006"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [],
   "next_best_actions": {
@@ -122,5 +122,5 @@
   "stop_reason": "probability 0.90 with 4 independent pieces of evidence",
   "tool_calls": 3,
   "tokens": 671,
-  "latency_s": 2.74
+  "latency_s": 0.38
 }

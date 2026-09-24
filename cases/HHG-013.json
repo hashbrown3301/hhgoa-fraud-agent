@@ -45,8 +45,8 @@
     ],
     "similar_prior_cases": [],
     "summary": "Verdict: fraud (probability 0.90) under the card_not_present_new_device pattern. The transaction deviates from the card's baseline by occurring on a rare channel and originates from a newly marked device, and the customer has denied the activity. These three independent pieces of evidence exceed the threshold for action.",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-013"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [
     {
@@ -93,7 +93,7 @@
   "stop_reason": "probability 0.90 with 3 independent pieces of evidence",
   "tool_calls": 4,
   "tokens": 596,
-  "latency_s": 0.82,
+  "latency_s": 0.52,
   "what_if": {
     "confirms": {
       "reply": "confirms",

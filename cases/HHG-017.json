@@ -41,8 +41,8 @@
     ],
     "similar_prior_cases": [],
     "summary": "Case HHG-017 was determined to be legitimate with no fraud pattern identified. The transaction of $100.09 falls within the card's 95th percentile spending range and the card is online 67% of the time, indicating typical usage. Additionally, the identity record shows a proxy IP, which aligns with the customer's confirmed activity.",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-017"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [
     {
@@ -89,7 +89,7 @@
   "stop_reason": "probability 0.03 with 3 independent pieces of evidence",
   "tool_calls": 4,
   "tokens": 625,
-  "latency_s": 4.66,
+  "latency_s": 0.49,
   "what_if": {
     "confirms": {
       "reply": "confirms",

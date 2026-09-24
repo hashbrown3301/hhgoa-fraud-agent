@@ -29,8 +29,8 @@
     ],
     "similar_prior_cases": [],
     "summary": "Case HHG-019 involves customer C07987 and card C07987-K2, triggered by a risk score alert. The verdict is legitimate with no specific fraud pattern identified. The strongest supporting evidence is the identity record showing the device as \"New\" and the transaction amount of $99.92 falling within the card's 95th percentile spending range ($555.44).",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-019"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [
     {
@@ -77,7 +77,7 @@
   "stop_reason": "verification response settled the question",
   "tool_calls": 4,
   "tokens": 614,
-  "latency_s": 5.31,
+  "latency_s": 0.47,
   "what_if": {
     "confirms": {
       "reply": "confirms",

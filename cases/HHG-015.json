@@ -45,8 +45,8 @@
     ],
     "similar_prior_cases": [],
     "summary": "Verdict: fraud, triggered by a card-not-present transaction on a new device. The transaction deviates from the card's baseline with a billing region never seen before and the device is flagged as new, and the customer has denied the activity. The high fraud probability (0.90) and customer denial support the decision to block the card and open a case.",
-    "written_to_graph": true,
-    "graph_case_id": "HHG-015"
+    "written_to_graph": false,
+    "graph_case_id": ""
   },
   "evidence_requests": [
     {
@@ -98,7 +98,7 @@
   "stop_reason": "probability 0.90 with 3 independent pieces of evidence",
   "tool_calls": 4,
   "tokens": 594,
-  "latency_s": 2.83,
+  "latency_s": 0.2,
   "what_if": {
     "confirms": {
       "reply": "confirms",

@@ -2,10 +2,10 @@
   "case_id": "HHG-001",
   "tool_calls": 3,
   "tokens": 638,
-  "latency_s": 3.27,
+  "latency_s": 0.18,
   "events": [
     {
-      "t": 0.014,
+      "t": 0.013,
       "type": "tool",
       "name": "customer_history",
       "args": {
@@ -13,7 +13,7 @@
       }
     },
     {
-      "t": 0.214,
+      "t": 0.165,
       "type": "tool",
       "name": "gather_facts",
       "args": {
@@ -21,13 +21,13 @@
       }
     },
     {
-      "t": 0.215,
+      "t": 0.166,
       "type": "tool",
       "name": "case_memory.similar",
       "args": {}
     },
     {
-      "t": 3.261,
+      "t": 0.171,
       "type": "llm",
       "name": "summary",
       "tokens": 638
