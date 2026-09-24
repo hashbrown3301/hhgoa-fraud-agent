@@ -1,0 +1,89 @@
+{
+  "case_id": "HHG-004",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.9,
+    "pattern": "card_not_present_new_device",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3583227"
+    ],
+    "first_suspicious_txn_id": "3583227",
+    "connected_card_ids": [],
+    "connected_device_profiles": [],
+    "exposure_usd": 128.33,
+    "evidence": [
+      {
+        "claim": "Identity record: device marked New",
+        "source": "graph",
+        "ref": "detector:device_anomaly",
+        "entity_ids": [
+          "3583227"
+        ]
+      },
+      {
+        "claim": "card is online 100% of the time",
+        "source": "graph",
+        "ref": "counter:typical_channel",
+        "entity_ids": []
+      },
+      {
+        "claim": "4 earlier transactions of a similar amount, roughly every 42 days (regular cadence)",
+        "source": "graph",
+        "ref": "counter:recurring_amount",
+        "entity_ids": []
+      },
+      {
+        "claim": "Cardholder was asked and denied making the transaction(s)",
+        "source": "customer",
+        "ref": "evidence_request:1",
+        "entity_ids": []
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "Verdict: fraud. Pattern: card_not_present_new_device. The customer denied the transaction and the identity record shows the device is marked as new, providing two independent pieces of evidence supporting the fraud determination.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-004"
+  },
+  "evidence_requests": [],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: customer denied the activity; exposure $128.33"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2/R6/R9: fraud case with evidence attached"
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: customer denied the activity; exposure $128.33"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2/R6/R9: fraud case with evidence attached"
+      }
+    ],
+    "what_changed": "nothing"
+  },
+  "sar": {
+    "file": false,
+    "reason": "No SAR required: exposure and links do not meet the reporting trigger (3a).",
+    "narrative": "",
+    "subjects": [],
+    "total_amount_usd": 0,
+    "activity_dates": []
+  },
+  "stop_reason": "probability 0.90 with 2 independent pieces of evidence",
+  "tool_calls": 3,
+  "tokens": 636,
+  "latency_s": 1.1
+}

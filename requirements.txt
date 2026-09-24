@@ -1,0 +1,20 @@
+# Core
+pandas>=2.0
+numpy>=1.24
+python-dotenv>=1.0
+
+# Policy / validator tests
+pytest>=7.0
+
+# Case memory / calibration experiments (features.py, model.py)
+scikit-learn>=1.3
+
+# Embeddings for GraphRAG vector store (agent/embeddings.py)
+sentence-transformers>=2.7
+
+# TigerGraph MCP client + server
+mcp>=1.0
+tigergraph-mcp>=0.1
+
+# LLM (Groq) for grounded summaries / SAR narratives
+groq>=0.9

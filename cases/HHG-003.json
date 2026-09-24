@@ -1,0 +1,126 @@
+{
+  "case_id": "HHG-003",
+  "case": {
+    "status": "closed_legitimate",
+    "verdict": "legitimate",
+    "fraud_probability": 0.03,
+    "pattern": "none",
+    "pattern_description": "",
+    "affected_txn_ids": [],
+    "first_suspicious_txn_id": "",
+    "connected_card_ids": [],
+    "connected_device_profiles": [],
+    "exposure_usd": 0.0,
+    "evidence": [
+      {
+        "claim": "billing region 330.0 visited 42 times over 19 weeks",
+        "source": "graph",
+        "ref": "counter:routine_region",
+        "entity_ids": []
+      },
+      {
+        "claim": "$49.00 is within this card's 95th percentile ($424.99)",
+        "source": "graph",
+        "ref": "counter:typical_amount",
+        "entity_ids": []
+      },
+      {
+        "claim": "card is in-person 95% of the time",
+        "source": "graph",
+        "ref": "counter:typical_channel",
+        "entity_ids": []
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "Case HHG-003 was closed as legitimate with no fraud pattern identified. The transaction was deemed low risk (fraud probability 0.03) supported by evidence that the $49 amount falls within the card's 95th percentile spending limit and that the billing region was visited 42 times over 19 weeks, indicating normal usage. The customer confirmed the transaction, and no further action was required.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-003"
+  },
+  "evidence_requests": [
+    {
+      "type": "customer_validation",
+      "asked_after_step": 5,
+      "assumed_response": "Assumed the cardholder confirms the activity (evidence leans legitimate, p=0.45). SIMULATED: no real reply is available in this exercise."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "VERIFY_WITH_CUSTOMER",
+        "route": "auto",
+        "reason": "R1: p=0.45 rests on weak or conflicting signals; verify before any block"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "3a: evidence requested and p>=0.30"
+      }
+    ],
+    "final": [
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "3a: case opened when evidence was requested; closed as legitimate"
+      },
+      {
+        "action": "CLOSE_NO_FRAUD",
+        "route": "auto",
+        "reason": "R3: customer confirmed the transaction; confirmation noted in the case"
+      }
+    ],
+    "what_changed": "Simulated reply (confirms) moved probability from 0.45 to 0.03; actions changed from ['VERIFY_WITH_CUSTOMER', 'CREATE_CASE'] to ['CREATE_CASE', 'CLOSE_NO_FRAUD']."
+  },
+  "sar": {
+    "file": false,
+    "reason": "No SAR required: verdict is not confirmed/strongly-suspected fraud.",
+    "narrative": "",
+    "subjects": [],
+    "total_amount_usd": 0,
+    "activity_dates": []
+  },
+  "stop_reason": "probability 0.03 with 3 independent pieces of evidence",
+  "tool_calls": 4,
+  "tokens": 641,
+  "latency_s": 0.96,
+  "what_if": {
+    "confirms": {
+      "reply": "confirms",
+      "probability": 0.03,
+      "verdict": "legitimate",
+      "pattern": "none",
+      "actions": [
+        {
+          "action": "CREATE_CASE",
+          "route": "auto",
+          "reason": "3a: case opened when evidence was requested; closed as legitimate"
+        },
+        {
+          "action": "CLOSE_NO_FRAUD",
+          "route": "auto",
+          "reason": "R3: customer confirmed the transaction; confirmation noted in the case"
+        }
+      ],
+      "explanation": "customer confirmed the transaction (R3)"
+    },
+    "denies": {
+      "reply": "denies",
+      "probability": 0.45,
+      "verdict": "uncertain",
+      "pattern": "none",
+      "actions": [
+        {
+          "action": "BLOCK_CARD",
+          "route": "L1",
+          "reason": "R2: customer denied the activity; exposure $49.00"
+        },
+        {
+          "action": "CREATE_CASE",
+          "route": "auto",
+          "reason": "R2/R6/R9: fraud case with evidence attached"
+        }
+      ],
+      "explanation": "customer denies, but activity matches the card's routine: evidence conflicts (R7/R8)"
+    },
+    "actual_reply": "Assumed the cardholder confirms the activity (evidence leans legitimate, p=0.45). SIMULATED: no real reply is available in this exercise."
+  }
+}

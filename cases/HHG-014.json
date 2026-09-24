@@ -1,0 +1,165 @@
+{
+  "case_id": "HHG-014",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.88,
+    "pattern": "undocumented",
+    "pattern_description": "Many cards show purchases from one device profile that is marked New every time, behind an anonymous proxy, with low model scores. device profile used by 44 cards, 100% marked New, mean risk score only 0.145; device model SM-G935F appears in closed confirmed cases CC-0334, CC-0590, CC-2649, CC-2971. Matches no documented typology.",
+    "affected_txn_ids": [
+      "3478561"
+    ],
+    "first_suspicious_txn_id": "3478561",
+    "connected_card_ids": [
+      "C01996-K2",
+      "C02910-K1",
+      "C02975-K1",
+      "C03676-K2",
+      "C04108-K2",
+      "C10326-K1",
+      "C11670-K2"
+    ],
+    "connected_device_profiles": [
+      "SM-G935F Build/NRD90M | Android 7.0 | chrome 62.0 for android | 1920x1080"
+    ],
+    "exposure_usd": 74.96,
+    "evidence": [
+      {
+        "claim": "Deviates from this card's baseline: rare channel",
+        "source": "graph",
+        "ref": "detector:baseline_deviation",
+        "entity_ids": [
+          "3478561"
+        ]
+      },
+      {
+        "claim": "Identity record: device marked New, proxy IP_PROXY:ANONYMOUS",
+        "source": "graph",
+        "ref": "detector:device_anomaly",
+        "entity_ids": [
+          "3478561"
+        ]
+      },
+      {
+        "claim": "device profile used by 44 cards, 100% marked New, mean risk score only 0.145; device model SM-G935F appears in closed confirmed cases CC-0334, CC-0590, CC-2649, CC-2971",
+        "source": "graph",
+        "ref": "detector:cross_card_link",
+        "entity_ids": [
+          "C04274",
+          "C09049",
+          "C09906",
+          "C10326",
+          "C11670",
+          "C01289",
+          "C01996",
+          "C02910",
+          "C02975",
+          "C03676",
+          "CC-0334",
+          "CC-0590",
+          "CC-2649",
+          "CC-2971",
+          "CC-2985",
+          "CC-3035",
+          "CC-5122"
+        ]
+      },
+      {
+        "claim": "billing region 191.0 visited 36 times over 21 weeks",
+        "source": "graph",
+        "ref": "counter:routine_region",
+        "entity_ids": []
+      },
+      {
+        "claim": "$74.96 is within this card's 95th percentile ($108.24)",
+        "source": "graph",
+        "ref": "counter:typical_amount",
+        "entity_ids": []
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-0334",
+      "CC-0590",
+      "CC-2649",
+      "CC-2971"
+    ],
+    "summary": "Undocumented assessed at p=0.88 (a strong signal plus at least one more independent signal).",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-014"
+  },
+  "evidence_requests": [],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "p=0.88 with 3 independent signals (not a single-signal case, R1 does not apply); exposure $74.96"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2/R6/R9: fraud case with evidence attached"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "3a: connected to a shared device profile / other cards (R6); undocumented coordinated pattern (R9)"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: other cards share this device profile"
+      },
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "R9: describe the undocumented pattern for an analyst"
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "p=0.88 with 3 independent signals (not a single-signal case, R1 does not apply); exposure $74.96"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2/R6/R9: fraud case with evidence attached"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "3a: connected to a shared device profile / other cards (R6); undocumented coordinated pattern (R9)"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: other cards share this device profile"
+      },
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "R9: describe the undocumented pattern for an analyst"
+      }
+    ],
+    "what_changed": "nothing"
+  },
+  "sar": {
+    "file": true,
+    "reason": "3a: connected to other cards via a shared device profile (R6); undocumented coordinated pattern (R9)",
+    "narrative": "This report concerns card C13487-K1 held by customer C13487, investigated as case HHG-014. 1 transaction on 2016-11-22 totalling $74.96 was identified as a coordinated pattern not matching any documented fraud typology. device profile used by 44 cards, 100% marked New, mean risk score only 0.145; device model SM-G935F appears in closed confirmed cases CC-0334, CC-0590, CC-2649, CC-2971. Identity record: device marked New, proxy IP_PROXY:ANONYMOUS. Deviates from this card's baseline: rare channel. The same device profile was also used on 15 other customer accounts in the surrounding window, 7 of which are identified in our records. This device model also appears in 7 prior confirmed-fraud cases: CC-0334, CC-0590, CC-2649, CC-2971. The investigation assessed the fraud probability at 0.88 based on 3 independent piece(s) of corroborating evidence, following a strong signal plus at least one more independent signal. Actions taken or recommended: Block Card, Create Case, File Report, Monitor Connected Cards, Escalate To Analyst.",
+    "subjects": [
+      "C13487"
+    ],
+    "total_amount_usd": 74.96,
+    "activity_dates": [
+      "2016-11-22",
+      "2016-11-22"
+    ]
+  },
+  "stop_reason": "probability 0.88 with 3 independent pieces of evidence",
+  "tool_calls": 3,
+  "tokens": 0,
+  "latency_s": 12.8
+}

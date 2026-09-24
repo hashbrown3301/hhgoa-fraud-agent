@@ -1,0 +1,138 @@
+{
+  "case_id": "HHG-010",
+  "case": {
+    "status": "closed_legitimate",
+    "verdict": "legitimate",
+    "fraud_probability": 0.03,
+    "pattern": "none",
+    "pattern_description": "",
+    "affected_txn_ids": [],
+    "first_suspicious_txn_id": "",
+    "connected_card_ids": [],
+    "connected_device_profiles": [],
+    "exposure_usd": 0.0,
+    "evidence": [
+      {
+        "claim": "Identity record: device marked New",
+        "source": "graph",
+        "ref": "detector:device_anomaly",
+        "entity_ids": [
+          "3506725"
+        ]
+      },
+      {
+        "claim": "billing region 469.0 visited 24 times over 13 weeks",
+        "source": "graph",
+        "ref": "counter:routine_region",
+        "entity_ids": []
+      },
+      {
+        "claim": "card is online 48% of the time",
+        "source": "graph",
+        "ref": "counter:typical_channel",
+        "entity_ids": []
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "No fraud pattern assessed at p=0.03 (customer confirmed the transaction (R3)).",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-010"
+  },
+  "evidence_requests": [
+    {
+      "type": "step_up_auth",
+      "asked_after_step": 5,
+      "assumed_response": "Assumed the cardholder confirms the activity (evidence leans legitimate, p=0.30). SIMULATED: no real reply is available in this exercise."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: p=0.30 rests on weak or conflicting signals; verify before any block"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "3a: evidence requested and p>=0.30"
+      },
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "R8: verdict uncertain and exposure $1,000.03 exceeds $500"
+      }
+    ],
+    "final": [
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "3a: case opened when evidence was requested; closed as legitimate"
+      },
+      {
+        "action": "CLOSE_NO_FRAUD",
+        "route": "auto",
+        "reason": "R3: customer confirmed the transaction; confirmation noted in the case"
+      }
+    ],
+    "what_changed": "Simulated reply (confirms) moved probability from 0.30 to 0.03; actions changed from ['STEP_UP_AUTH', 'CREATE_CASE', 'ESCALATE_TO_ANALYST'] to ['CREATE_CASE', 'CLOSE_NO_FRAUD']."
+  },
+  "sar": {
+    "file": false,
+    "reason": "No SAR required: verdict is not confirmed/strongly-suspected fraud.",
+    "narrative": "",
+    "subjects": [],
+    "total_amount_usd": 0,
+    "activity_dates": []
+  },
+  "stop_reason": "probability 0.03 with 2 independent pieces of evidence",
+  "tool_calls": 4,
+  "tokens": 0,
+  "latency_s": 1.44,
+  "what_if": {
+    "confirms": {
+      "reply": "confirms",
+      "probability": 0.03,
+      "verdict": "legitimate",
+      "pattern": "none",
+      "actions": [
+        {
+          "action": "CREATE_CASE",
+          "route": "auto",
+          "reason": "3a: case opened when evidence was requested; closed as legitimate"
+        },
+        {
+          "action": "CLOSE_NO_FRAUD",
+          "route": "auto",
+          "reason": "R3: customer confirmed the transaction; confirmation noted in the case"
+        }
+      ],
+      "explanation": "customer confirmed the transaction (R3)"
+    },
+    "denies": {
+      "reply": "denies",
+      "probability": 0.9,
+      "verdict": "fraud",
+      "pattern": "card_not_present_new_device",
+      "actions": [
+        {
+          "action": "BLOCK_CARD",
+          "route": "L1",
+          "reason": "R2: customer denied the activity; exposure $1,000.03"
+        },
+        {
+          "action": "CREATE_CASE",
+          "route": "auto",
+          "reason": "R2/R6/R9: fraud case with evidence attached"
+        },
+        {
+          "action": "FILE_REPORT",
+          "route": "L2",
+          "reason": "3a and R2: exposure $1,000.03 exceeds $1,000"
+        }
+      ],
+      "explanation": "customer denial plus at least one independent anomaly (R2)"
+    },
+    "actual_reply": "Assumed the cardholder confirms the activity (evidence leans legitimate, p=0.30). SIMULATED: no real reply is available in this exercise."
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "case_id": "HHG-015",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.9,
+    "pattern": "card_not_present_new_device",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3464869"
+    ],
+    "first_suspicious_txn_id": "3464869",
+    "connected_card_ids": [],
+    "connected_device_profiles": [],
+    "exposure_usd": 599.94,
+    "evidence": [
+      {
+        "claim": "Deviates from this card's baseline: billing region never seen",
+        "source": "graph",
+        "ref": "detector:baseline_deviation",
+        "entity_ids": [
+          "3464869"
+        ]
+      },
+      {
+        "claim": "Identity record: device marked New",
+        "source": "graph",
+        "ref": "detector:device_anomaly",
+        "entity_ids": [
+          "3464869"
+        ]
+      },
+      {
+        "claim": "card is online 82% of the time",
+        "source": "graph",
+        "ref": "counter:typical_channel",
+        "entity_ids": []
+      },
+      {
+        "claim": "Cardholder was asked and denied making the transaction(s)",
+        "source": "customer",
+        "ref": "evidence_request:1",
+        "entity_ids": []
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "Verdict: fraud, triggered by a card-not-present transaction on a new device. The transaction deviates from the card's baseline with a billing region never seen before and the device is flagged as new, and the customer has denied the activity. The high fraud probability (0.90) and customer denial support the decision to block the card and open a case.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-015"
+  },
+  "evidence_requests": [
+    {
+      "type": "step_up_auth",
+      "asked_after_step": 5,
+      "assumed_response": "Assumed the cardholder denies the activity (evidence leans fraud, p=0.60). SIMULATED: no real reply is available in this exercise."
+    }
+  ],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "STEP_UP_AUTH",
+        "route": "auto",
+        "reason": "R1: p=0.60 rests on weak or conflicting signals; verify before any block"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "3a: evidence requested and p>=0.30"
+      },
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "R8: verdict uncertain and exposure $599.94 exceeds $500"
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "R2: customer denied the activity; exposure $599.94"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "R2/R6/R9: fraud case with evidence attached"
+      }
+    ],
+    "what_changed": "Simulated reply (denies) moved probability from 0.60 to 0.90; actions changed from ['STEP_UP_AUTH', 'CREATE_CASE', 'ESCALATE_TO_ANALYST'] to ['BLOCK_CARD', 'CREATE_CASE']."
+  },
+  "sar": {
+    "file": false,
+    "reason": "No SAR required: exposure and links do not meet the reporting trigger (3a).",
+    "narrative": "",
+    "subjects": [],
+    "total_amount_usd": 0,
+    "activity_dates": []
+  },
+  "stop_reason": "probability 0.90 with 3 independent pieces of evidence",
+  "tool_calls": 4,
+  "tokens": 594,
+  "latency_s": 2.83,
+  "what_if": {
+    "confirms": {
+      "reply": "confirms",
+      "probability": 0.03,
+      "verdict": "legitimate",
+      "pattern": "none",
+      "actions": [
+        {
+          "action": "CREATE_CASE",
+          "route": "auto",
+          "reason": "3a: case opened when evidence was requested; closed as legitimate"
+        },
+        {
+          "action": "CLOSE_NO_FRAUD",
+          "route": "auto",
+          "reason": "R3: customer confirmed the transaction; confirmation noted in the case"
+        }
+      ],
+      "explanation": "customer confirmed the transaction (R3)"
+    },
+    "denies": {
+      "reply": "denies",
+      "probability": 0.9,
+      "verdict": "fraud",
+      "pattern": "card_not_present_new_device",
+      "actions": [
+        {
+          "action": "BLOCK_CARD",
+          "route": "L1",
+          "reason": "R2: customer denied the activity; exposure $599.94"
+        },
+        {
+          "action": "CREATE_CASE",
+          "route": "auto",
+          "reason": "R2/R6/R9: fraud case with evidence attached"
+        }
+      ],
+      "explanation": "customer denial plus at least one independent anomaly (R2)"
+    },
+    "actual_reply": "Assumed the cardholder denies the activity (evidence leans fraud, p=0.60). SIMULATED: no real reply is available in this exercise."
+  }
+}

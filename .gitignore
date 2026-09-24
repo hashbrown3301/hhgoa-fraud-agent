@@ -1,0 +1,25 @@
+# --- Raw dataset (too large for git; GitHub rejects files >100MB anyway) ---
+# Place the HHGOA dataset files in data/ locally; see README for the exact
+# filenames and where to get them. These are NEVER committed:
+data/transactions.csv
+data/identity.csv
+data/slice_devices.csv
+data/slice_customers_noV.csv
+data/closed_features.csv
+data/closed_case_vectors.csv
+graph_load/
+
+# --- Secrets ---
+.env
+
+# --- Generated / cache (safe to delete, rebuilt by the pipeline scripts) ---
+.llm_cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# --- OS noise ---
+.DS_Store
+Thumbs.db

@@ -1,0 +1,79 @@
+{
+  "case_id": "HHG-001",
+  "case": {
+    "status": "closed_legitimate",
+    "verdict": "legitimate",
+    "fraud_probability": 0.08,
+    "pattern": "none",
+    "pattern_description": "",
+    "affected_txn_ids": [],
+    "first_suspicious_txn_id": "",
+    "connected_card_ids": [],
+    "connected_device_profiles": [],
+    "exposure_usd": 0.0,
+    "evidence": [
+      {
+        "claim": "billing region 444.0 visited 10 times over 8 weeks",
+        "source": "graph",
+        "ref": "counter:routine_region",
+        "entity_ids": []
+      },
+      {
+        "claim": "$77.07 is within this card's 95th percentile ($381.86)",
+        "source": "graph",
+        "ref": "counter:typical_amount",
+        "entity_ids": []
+      },
+      {
+        "claim": "card is in-person 99% of the time",
+        "source": "graph",
+        "ref": "counter:typical_channel",
+        "entity_ids": []
+      }
+    ],
+    "similar_prior_cases": [],
+    "summary": "The transaction was deemed legitimate with no fraud pattern identified. The strongest supporting evidence includes the billing region 444.0 being visited 10 times over the past eight weeks and the $77.07 amount falling within the card's 95th percentile ($381.86). Additionally, the card is used in-person 99% of the time, reinforcing the low fraud probability of 0.08.",
+    "written_to_graph": true,
+    "graph_case_id": "HHG-001"
+  },
+  "evidence_requests": [],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "ALLOW_TRANSACTION",
+        "route": "auto",
+        "reason": "R1: no signal to justify a block; p=0.08, routine activity"
+      },
+      {
+        "action": "CLOSE_NO_FRAUD",
+        "route": "auto",
+        "reason": "Stop rule: p<=0.15 with 3 independent routine-match facts"
+      }
+    ],
+    "final": [
+      {
+        "action": "ALLOW_TRANSACTION",
+        "route": "auto",
+        "reason": "R1: no signal to justify a block; p=0.08, routine activity"
+      },
+      {
+        "action": "CLOSE_NO_FRAUD",
+        "route": "auto",
+        "reason": "Stop rule: p<=0.15 with 3 independent routine-match facts"
+      }
+    ],
+    "what_changed": "nothing"
+  },
+  "sar": {
+    "file": false,
+    "reason": "No SAR required: verdict is not confirmed/strongly-suspected fraud.",
+    "narrative": "",
+    "subjects": [],
+    "total_amount_usd": 0,
+    "activity_dates": []
+  },
+  "stop_reason": "probability 0.08 with 3 independent pieces of evidence",
+  "tool_calls": 3,
+  "tokens": 638,
+  "latency_s": 3.26
+}

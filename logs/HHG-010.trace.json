@@ -1,0 +1,42 @@
+{
+  "case_id": "HHG-010",
+  "tool_calls": 4,
+  "tokens": 0,
+  "latency_s": 1.44,
+  "events": [
+    {
+      "t": 0.006,
+      "type": "tool",
+      "name": "customer_history",
+      "args": {
+        "customer_id": "C10434"
+      }
+    },
+    {
+      "t": 0.232,
+      "type": "tool",
+      "name": "gather_facts",
+      "args": {
+        "txn": "3506725"
+      }
+    },
+    {
+      "t": 0.639,
+      "type": "tool",
+      "name": "case_memory.similar",
+      "args": {}
+    },
+    {
+      "t": 0.639,
+      "type": "tool",
+      "name": "simulate_reply",
+      "args": {}
+    },
+    {
+      "t": 1.436,
+      "type": "llm",
+      "name": "summary",
+      "tokens": 0
+    }
+  ]
+}
